@@ -1,28 +1,33 @@
-ember-pickr
-==============================================================================
+# Introduction
 
-Color Picker for EmberJS using pickr
+ember-pickr is an EmberJS addon that wraps [pickr](https://simonwep.github.io/pickr/),
+a flat, simple, responsive and hackable color picker. It has zero dependencies and
+works without jQuery.
 
-Installation
-------------------------------------------------------------------------------
+## Installation
 
-```
+```sh
 ember install ember-pickr
 ```
 
+## Usage
 
-Usage
-------------------------------------------------------------------------------
-```
-{{color-picker
-  value=value
-  default="#e04e39"
-  format="hex"
-}}
-```
+{{#docs-demo class='docs-text-left' as |demo|}}
+  {{#demo.example name='template.hbs'}}
+    <p>The currently selected color is <strong>{{value}}</strong>.</p>
+    <div class="docs-flex">
+      {{color-picker
+        value=value
+        default="#e04e39"
+        format="hex"
+      }}
+    </div>
+  {{/demo.example}}
 
-Options
-------------------------------------------------------------------------------
+  {{demo.snippet 'template.hbs'}}
+{{/docs-demo}}
+
+## Options
 
 Takes all [options](https://github.com/Simonwep/pickr#optional-options) that are applicable to pickr.
 
@@ -41,17 +46,20 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
 * **`format`**: One of `hsva`, `hsla`, `rgba`, `hex`, `cmyk` | **`{ h, s, v, a }`**
 * To use the **`onChange`** and **`onSave`** handlers, use closure actions.
 
-```
-{{color-picker
-  value=value
-  default="#e04e39"
-  format="hex"
-  saveLabel="Set Color"
-}}
-```
+{{#docs-demo class='docs-text-left' as |demo|}}
+  {{#demo.example name='template-onSave.hbs'}}
+    <p>The currently selected color is <strong>{{value}}</strong>.</p>
+    <div class="docs-flex">
+      {{color-picker
+        value=value
+        default="#e04e39"
+        format="hex"
+        saveLabel="Set Color"
+        onSave=(action "handleOnSave")
+      }}
+    </div>
+  {{/demo.example}}
 
-
-License
-------------------------------------------------------------------------------
-
-This project is licensed under the [MIT License](LICENSE.md).
+  {{demo.snippet 'template-onSave.hbs'}}
+  {{demo.snippet 'controller-onSave.js' title='controller.js'}}
+{{/docs-demo}}

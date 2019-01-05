@@ -1,0 +1,23 @@
+{{docs-hero}}
+
+<div class="docs-container docs-md">
+  <section class="docs-max-w-md docs-mx-auto docs-pb-8">
+    <div class="docs-md">
+      <div class="docs-flex docs-item-center">
+        {{#docs-demo class="docs-text-left" as |demo|}}
+          {{#demo.example}}
+            <p>The currently selected color is <strong>{{value}}</strong>.</p>
+            <div class="docs-flex docs-justify-center">
+              {{color-picker
+                value=value
+                default="#e04e39"
+                format="hex"
+                class="docs-border"
+              }}
+            </div>
+          {{/demo.example}}
+        {{/docs-demo}}
+      </div>
+    </div>
+  </section>
+</div>
