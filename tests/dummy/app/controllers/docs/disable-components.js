@@ -1,4 +1,4 @@
-// BEGIN-SNIPPET controller-onSave.js
+// BEGIN-SNIPPET controller-components.js
 import Controller from '@ember/controller';
 
 export default Controller.extend({
@@ -6,6 +6,7 @@ export default Controller.extend({
     this._super(...arguments);
     this.components = {
       opacity: false,
+      hue: false,
 
       interaction: {
         hex: false,
@@ -17,10 +18,6 @@ export default Controller.extend({
   },
 
   actions: {
-    handleOnSave(hsva) {
-      window.alert(`You chose ${hsva.toHEX().toString()}!`);
-    },
-
     handleOnChange(hsva) {
       this.set('value', hsva.toHEX().toString());
     }

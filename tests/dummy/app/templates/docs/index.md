@@ -14,10 +14,10 @@ ember install ember-pickr
 
 {{#docs-demo class='docs-text-left' as |demo|}}
   {{#demo.example name='template.hbs'}}
-    <p>The currently selected color is <strong>{{value}}</strong>.</p>
+    <p>The currently selected color is <strong>{{selectedColor}}</strong>.</p>
     <div class="docs-flex">
       {{color-picker
-        value=value
+        value=selectedColor
         default="#e04e39"
         format="hex"
       }}
@@ -45,13 +45,12 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
 * **`clearLabel`**: Button label for clear button | **`Clear`**
 * **`format`**: One of `hsva`, `hsla`, `rgba`, `hex`, `cmyk` | **`{ h, s, v, a }`**
 * To use the **`onChange`** and **`onSave`** handlers, use closure actions.
-
 {{#docs-demo class='docs-text-left' as |demo|}}
   {{#demo.example name='template-onSave.hbs'}}
-    <p>The currently selected color is <strong>{{value}}</strong>.</p>
+    <p>The currently selected color is <strong>{{color}}</strong>.</p>
     <div class="docs-flex">
       {{color-picker
-        value=value
+        value=color
         default="#e04e39"
         format="hex"
         saveLabel="Set Color"
@@ -62,4 +61,42 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
 
   {{demo.snippet 'template-onSave.hbs'}}
   {{demo.snippet 'controller-onSave.js' title='controller.js'}}
+{{/docs-demo}}
+The **`onSave`** and **`onChange`** handlers can take two parameters - **`hsva`** and **`instance`** where **`hsva`** is an HSVa
+color object and **`instance`** is the current instance of Pickr. The HSVa object has **`toHSVA`**, **`toHSLA`**,
+**`toRGBA`**, **`toHEX`**, **`toCMYK`**, and **`clone`** methods that return the converts the object into corresponding arrays.
+You can call **`toString`** on the resulting array to get the string representation of the colors.
+* To toggle components inside the color picker, you can pass the following options to the **`components`** property:
+```javascript
+{
+    preview: true,
+    opacity: true,
+    hue: true,
+
+    interaction: {
+      hex: true,
+      rgba: true,
+      hsva: true,
+      input: true,
+      clear: true,
+      save: true
+    }
+}
+```
+{{#docs-demo class='docs-text-left' as |demo|}}
+  {{#demo.example name='template-components.hbs'}}
+    <p>The currently selected color is <strong>{{value}}</strong>.</p>
+    <div class="docs-flex">
+      {{color-picker
+        value=value
+        format="hex"
+        default="00f1f1"
+        components=components
+        onChange=(action "handleOnChange")
+      }}
+    </div>
+  {{/demo.example}}
+
+  {{demo.snippet 'template-components.hbs'}}
+  {{demo.snippet 'controller-components.js' title='controller.js'}}
 {{/docs-demo}}
