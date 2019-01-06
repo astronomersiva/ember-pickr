@@ -2,7 +2,7 @@
   "master": {
     "path": "versions/master",
     "name": "master",
-    "sha": "722194a827dcf6b69e3ab68dde5ac938f42b530a",
+    "sha": "77d38aed6de741de94f5f74285d5134d1d6137d5",
     "tag": null
   },
   "v1.0.0": {
@@ -14,7 +14,7 @@
   "-latest": {
     "path": "",
     "name": "Latest",
-    "sha": "722194a827dcf6b69e3ab68dde5ac938f42b530a",
+    "sha": "77d38aed6de741de94f5f74285d5134d1d6137d5",
     "tag": null
   }
 }
