@@ -49,11 +49,11 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
   format="hex"
   saveLabel="Set Color"
 }}
+```
 The **`onSave`** and **`onChange`** handlers can take two parameters - **`hsva`** and **`instance`** where **`hsva`** is an HSVa color object
 and **`instance`** is the current instance of Pickr. The HSVa object has **`toHSVA`**, **`toHSLA`**, **`toRGBA`**, **`toHEX`**, **`toCMYK`**,
 and **`clone`** methods that return the converts the object into corresponding arrays. You can call **`toString`** on the
 resulting array to get the string representation of the colors.
-```
 * To toggle components inside the color picker, you can pass the following options to the **`components`** property:
 ```javascript
 {
