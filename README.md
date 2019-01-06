@@ -1,7 +1,9 @@
-ember-pickr
+ember-pickr [![Build Status](https://travis-ci.org/astronomersiva/ember-pickr.svg?branch=master)](https://travis-ci.org/astronomersiva/ember-pickr)
 ==============================================================================
 
-Color Picker for EmberJS using pickr
+Color Picker for EmberJS using [pickr](https://github.com/Simonwep/pickr)
+
+[Demo & Documentation](https://astronomersiva.github.io/ember-pickr/)
 
 Installation
 ------------------------------------------------------------------------------
