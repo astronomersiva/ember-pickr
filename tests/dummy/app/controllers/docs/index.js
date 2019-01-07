@@ -18,7 +18,9 @@ export default Controller.extend({
 
   actions: {
     handleOnSave(hsva) {
-      window.alert(`You chose ${hsva.toHEX().toString()}!`);
+      if (hsva) {
+        window.alert(`You chose ${hsva.toHEX().toString()}!`);
+      }
     },
 
     handleOnChange(hsva) {

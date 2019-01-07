@@ -98,6 +98,10 @@ export default Component.extend({
   },  
 
   formatColor(hsva) {
+    if (!hsva) {
+      return null;
+    }
+
     let value = hsva;
     let format = this.get('format');
     if (format) {
