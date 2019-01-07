@@ -6268,7 +6268,8 @@ var a=Ember.Component.extend({layout:t.default,didInsertElement:function(){this.
 this._options={disabled:this.get("disabled")||!1,comparison:this.get("comparison")||!0,default:this.get("value")||this.get("default")||"fff",defaultRepresentation:this.get("defaultRepresentation")||"HEX",showAlways:this.get("showAlways")||!1,closeWithKey:this.get("closeWithKey")||"Escape",position:this.get("position")||"middle",adjustableNumbers:this.get("adjustableNumbers")||!0,strings:{save:this.get("saveLabel")||"Save",clear:this.get("clearLabel")||"Clear"}},this._components=(0,r.default)({preview:!0,opacity:!0,hue:!0,interaction:{hex:!0,rgba:!0,hsva:!0,input:!0,clear:!0,save:!0}},this.get("components"))
 var t=n.default.create(i({el:this.element},this._options,{components:i({},this._components),onSave:function(t,r){var n=e.formatColor(t)
 e.set("value",n),e.onSave&&e.onSave(t,r)},onChange:function(t,r){e.onChange&&e.onChange(t,r)}}))
-this.set("value",this.formatColor(t.getColor())),this._pickr=t},formatColor:function(e){var t=e,r=this.get("format")
+this.set("value",this.formatColor(t.getColor())),this._pickr=t},formatColor:function(e){if(!e)return null
+var t=e,r=this.get("format")
 return r&&(r=r.toUpperCase(),t=t["to".concat(r)]().toString()),t},willDestroyElement:function(){this._pickr.destroy(),this._super.apply(this,arguments)}})
 e.default=a}),define("ember-pickr/templates/components/color-picker",["exports"],function(e){"use strict"
 e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"gFX4rkXE",block:'{"symbols":["&default"],"statements":[[14,1],[0,"\\n"]],"hasEval":false}',meta:{moduleName:"ember-pickr/templates/components/color-picker.hbs"}})}),define("ember-pickr/utils/mergeDeep",["exports"],function(e){"use strict"
