@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { click, render } from '@ember/test-helpers';
+import { click, fillIn, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | color-picker', function(hooks) {
@@ -101,5 +101,35 @@ module('Integration | Component | color-picker', function(hooks) {
       getComputedStyle(this.element.querySelector('.pcr-color-opacity')).display,
       'none'
     );
+  });
+
+  test('it respects the format option', async function(assert) {
+    this.set('color', '#123');
+
+    await render(hbs`
+      {{color-picker value=color format="hex"}}
+    `);
+    assert.equal(this.get('color'), '#123123');
+
+    await render(hbs`
+      {{color-picker value=color format="hsva"}}
+    `);
+    assert.equal(this.get('color'), 'hsva(153, 64%, 20%, 1.0)');
+
+  });
+
+  test('it changes color when the bound value is changed', async function(assert) {
+    this.set('color', '#123');
+
+    await render(hbs`
+      {{input value=color}}
+      {{color-picker value=color format="hex"}}
+    `);
+
+    assert.equal(this.get('color'), '#123123');
+    assert.equal(this.element.querySelector('input').value, '#123123');
+
+    await fillIn('input', '#00ff00');
+    assert.equal(this.get('color'), '#00ff00');
   });
 });
