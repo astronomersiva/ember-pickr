@@ -1,6 +1,9 @@
 import Component from '@ember/component';
 import layout from '../templates/components/color-picker';
+
 import mergeDeep from "../utils/mergeDeep";
+
+import { computed }  from '@ember/object';
 import { assert } from '@ember/debug';
 
 import Pickr from 'pickr';
@@ -79,7 +82,7 @@ export default Component.extend({
 
       onSave: (hsva, instance) => {
         let value = this.formatColor(hsva);
-        this.set('value', value);
+        this.set('_value', value);
 
         if (this.onSave) {
           this.onSave(hsva, instance);
@@ -93,9 +96,30 @@ export default Component.extend({
       }
     });
 
-    this.set('value', this.formatColor(pickr.getColor()));
+    this.set('_value', this.formatColor(pickr.getColor()));
     this._pickr = pickr;
-  },  
+  },
+
+  value: computed('_value', {
+    get() {
+      return this.get('_value');
+    },
+
+    set(key, value) {
+      let pickr = this._pickr;
+
+      if (pickr) {
+        let currentColor = this.formatColor(pickr.getColor());
+        // This check is to avoid setting the same color twice one after another
+        // Without this check, this will result in two computations for every color change
+        if (currentColor !== value) {
+          this._pickr.setColor(value);
+        }
+      }
+
+      return value;
+    }
+  }),
 
   formatColor(hsva) {
     if (!hsva) {
