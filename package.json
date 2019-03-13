@@ -1,6 +1,6 @@
 {
   "name": "ember-pickr",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Color Picker for EmberJS using pickr",
   "keywords": [
     "ember-addon"
@@ -24,7 +24,7 @@
     "ember-auto-import": "^1.2.19",
     "ember-cli-babel": "^7.1.2",
     "ember-cli-htmlbars": "^3.0.1",
-    "pickr-widget": "^0.3.2"
+    "pickr-widget": "0.3.2"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",
