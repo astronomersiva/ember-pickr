@@ -8,7 +8,7 @@ module.exports = {
   options: {
     autoImport: {
       alias: {
-        pickr: 'pickr-widget/dist/pickr.min.js'
+        pickr: '@simonwep/pickr/dist/pickr.min.js'
       }
     }
   },
@@ -21,7 +21,7 @@ module.exports = {
 
     this.app = app;
 
-    let pickr = path.join('node_modules', 'pickr-widget', 'dist');
+    let pickr = path.join('node_modules', '@simonwep/pickr', 'dist');
     app.import(path.join(pickr, 'pickr.min.css'));
   }
 };

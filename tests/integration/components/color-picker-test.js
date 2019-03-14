@@ -3,11 +3,18 @@ import { setupRenderingTest } from 'ember-qunit';
 import { click, fillIn, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
+// This horror is because, pickr has CSS transitions
+// while values are set. Without these, most tests will fail.
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 module('Integration | Component | color-picker', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{color-picker}}`);
+    await render(hbs`{{color-picker default="ffffff"}}`);
+    await sleep(1000);
 
     assert.equal(
       getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
@@ -17,18 +24,21 @@ module('Integration | Component | color-picker', function(hooks) {
 
   test('it applies the disabled property', async function(assert) {
     await render(hbs`{{color-picker disabled=true}}`);
+    await sleep(1000);
 
     assert.ok(this.element.querySelector('.pcr-button').className.includes('disabled'));
   });
 
   test('it is not disabled by default', async function(assert) {
     await render(hbs`{{color-picker}}`);
+    await sleep(1000);
 
     assert.notOk(this.element.querySelector('.pcr-button').className.includes('disabled'));
   });
 
   test('it applies the default value', async function(assert) {
     await render(hbs`{{color-picker default="#333"}}`);
+    await sleep(1000);
 
     assert.equal(
       getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
@@ -38,6 +48,7 @@ module('Integration | Component | color-picker', function(hooks) {
 
   test('it takes the color assigned to value in initial render', async function(assert) {
     await render(hbs`{{color-picker value="#fff"}}`);
+    await sleep(1000);
 
     assert.equal(
       getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
@@ -47,6 +58,7 @@ module('Integration | Component | color-picker', function(hooks) {
 
   test('it takes the color assigned to value in initial render even when default is present', async function(assert) {
     await render(hbs`{{color-picker default="#ff0000" value="#fff"}}`);
+    await sleep(1000);
 
     assert.equal(
       getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
@@ -56,6 +68,7 @@ module('Integration | Component | color-picker', function(hooks) {
 
   test('it keeps the color palette hidden when rendered', async function(assert) {
     await render(hbs`{{color-picker}}`);
+    await sleep(1000);
 
     assert.equal(
       getComputedStyle(this.element.querySelector('.pcr-app')).visibility,
@@ -70,6 +83,7 @@ module('Integration | Component | color-picker', function(hooks) {
 
   test('it opens the color palette when clicked', async function(assert) {
     await render(hbs`{{color-picker showAlways=true}}`);
+    await sleep(1000);
     await click('.pcr-button');
 
     assert.equal(
@@ -95,6 +109,7 @@ module('Integration | Component | color-picker', function(hooks) {
     this.set('componentOpts', components);
 
     await render(hbs`{{color-picker components=componentOpts}}`);
+    await sleep(1000);
     await click('.pcr-button');
 
     assert.equal(
@@ -109,11 +124,13 @@ module('Integration | Component | color-picker', function(hooks) {
     await render(hbs`
       {{color-picker value=color format="hex"}}
     `);
+    await sleep(1000);
     assert.equal(this.get('color'), '#123123');
 
     await render(hbs`
       {{color-picker value=color format="hsva"}}
     `);
+    await sleep(1000);
     assert.equal(this.get('color'), 'hsva(153, 64%, 20%, 1.0)');
 
   });
@@ -125,6 +142,7 @@ module('Integration | Component | color-picker', function(hooks) {
       {{input value=color}}
       {{color-picker value=color format="hex"}}
     `);
+    await sleep(1000);
 
     assert.equal(this.get('color'), '#123123');
     assert.equal(this.element.querySelector('input').value, '#123123');
