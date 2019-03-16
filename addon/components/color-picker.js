@@ -78,26 +78,30 @@ export default Component.extend({
 
       components: {
         ...this._components
-      },
-
-      onSave: (hsva, instance) => {
-        let value = this.formatColor(hsva);
-        this.set('_value', value);
-
-        if (this.onSave) {
-          this.onSave(hsva, instance);
-        }
-      },
-
-      onChange: (hsva, instance) => {
-        if (this.onChange) {
-          this.onChange(hsva, instance);
-        }
       }
     });
 
-    this.set('_value', this.formatColor(pickr.getColor()));
-    this._pickr = pickr;
+    pickr.on('init', () => {
+      this.set('_value', this.formatColor(pickr.getColor()));
+      this._pickr = pickr;
+    });
+
+    pickr.on('save', (...args) => {
+      let [hsva, instance] = args;
+      let value = this.formatColor(hsva);
+      this.set('_value', value);
+
+      if (this.onSave) {
+        this.onSave(hsva, instance);
+      }
+    });
+
+    pickr.on('change', (...args) => {
+      let [hsva, instance] = args;
+      if (this.onChange) {
+        this.onChange(hsva, instance);
+      }
+    });
   },
 
   value: computed('_value', {
