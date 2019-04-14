@@ -71,7 +71,7 @@ export default Component.extend({
       }
     }, this.get('components'));
 
-    let pickr = Pickr.create({
+    this._pickr = Pickr.create({
       el: this.element,
 
       ...this._options,
@@ -81,12 +81,11 @@ export default Component.extend({
       }
     });
 
-    pickr.on('init', () => {
-      this.set('_value', this.formatColor(pickr.getColor()));
-      this._pickr = pickr;
+    this._pickr.on('init', () => {
+      this.set('_value', this.formatColor(this._pickr.getColor()));
     });
 
-    pickr.on('save', (...args) => {
+    this._pickr.on('save', (...args) => {
       let [hsva, instance] = args;
       let value = this.formatColor(hsva);
       this.set('_value', value);
@@ -96,7 +95,7 @@ export default Component.extend({
       }
     });
 
-    pickr.on('change', (...args) => {
+    this._pickr.on('change', (...args) => {
       let [hsva, instance] = args;
       if (this.onChange) {
         this.onChange(hsva, instance);
@@ -110,10 +109,8 @@ export default Component.extend({
     },
 
     set(key, value) {
-      let pickr = this._pickr;
-
-      if (pickr) {
-        let currentColor = this.formatColor(pickr.getColor());
+      if (this._pickr) {
+        let currentColor = this.formatColor(this._pickr.getColor());
         // This check is to avoid setting the same color twice one after another
         // Without this check, this will result in two computations for every color change
         if (currentColor !== value) {
