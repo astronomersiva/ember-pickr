@@ -1,6 +1,6 @@
 {
   "name": "ember-pickr",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Color Picker for EmberJS using pickr",
   "keywords": [
     "ember-addon"
