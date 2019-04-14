@@ -36,6 +36,13 @@ module('Integration | Component | color-picker', function(hooks) {
     assert.notOk(this.element.querySelector('.pcr-button').className.includes('disabled'));
   });
 
+  test('it applies the comparison property', async function(assert) {
+    await render(hbs`{{color-picker comparison=false}}`);
+    await sleep(1000);
+
+    assert.equal(this.element.querySelector('.pcr-button').style.transition, 'none 0s ease 0s');
+  });
+
   test('it applies the default value', async function(assert) {
     await render(hbs`{{color-picker default="#333"}}`);
     await sleep(1000);

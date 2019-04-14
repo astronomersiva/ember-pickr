@@ -23,7 +23,7 @@ export default Component.extend({
       disabled: this.get('disabled') || false,
 
       // If set to false it would directly apply the selected color on the button and preview.
-      comparison: this.get('comparison') || true,
+      comparison: this.get('comparison') !== false,
 
       // Default color
       default: this.get('value') || this.get('default') || 'fff',
@@ -48,7 +48,7 @@ export default Component.extend({
 
       // Enables the ability to change numbers in an input field with the scroll-wheel.
       // To use it set the cursor on a position where a number is and scroll, use ctrl to make steps of five
-      adjustableNumbers: this.get('adjustableNumbers') || true,
+      adjustableNumbers: this.get('adjustableNumbers') !== false,
 
       strings: {
         save: this.get('saveLabel') || 'Save',
