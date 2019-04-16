@@ -9,15 +9,20 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function getPickerElement(selector = '.pcr-app') {
+  let matches = document.querySelectorAll(selector);
+  return matches[matches.length - 1];
+}
+
 module('Integration | Component | color-picker', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await render(hbs`{{color-picker default="ffffff"}}`);
+    await render(hbs`{{color-picker default="#ffffff"}}`);
     await sleep(1000);
 
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
+      getComputedStyle(this.element.querySelector('.pcr-button')).color,
       'rgb(255, 255, 255)'
     );
   });
@@ -48,7 +53,7 @@ module('Integration | Component | color-picker', function(hooks) {
     await sleep(1000);
 
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
+      getComputedStyle(this.element.querySelector('.pcr-button')).color,
       'rgb(51, 51, 51)'
     );
   });
@@ -58,7 +63,7 @@ module('Integration | Component | color-picker', function(hooks) {
     await sleep(1000);
 
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
+      getComputedStyle(this.element.querySelector('.pcr-button')).color,
       'rgb(255, 255, 255)'
     );
   });
@@ -68,7 +73,7 @@ module('Integration | Component | color-picker', function(hooks) {
     await sleep(1000);
 
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-button')).backgroundColor,
+      getComputedStyle(this.element.querySelector('.pcr-button')).color,
       'rgb(255, 255, 255)'
     );
   });
@@ -77,13 +82,15 @@ module('Integration | Component | color-picker', function(hooks) {
     await render(hbs`{{color-picker}}`);
     await sleep(1000);
 
+    // this is because the color picker is created as a child of body
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-app')).visibility,
+      getComputedStyle(getPickerElement()).visibility,
       'hidden'
     );
 
+    // this is because the color picker is created as a child of body
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-app')).opacity,
+      getComputedStyle(getPickerElement()).opacity,
       0
     );
   });
@@ -93,13 +100,15 @@ module('Integration | Component | color-picker', function(hooks) {
     await sleep(1000);
     await click('.pcr-button');
 
+    // this is because the color picker is created as a child of body
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-app')).visibility,
+      getComputedStyle(getPickerElement()).visibility,
       'visible'
     );
 
+    // this is because the color picker is created as a child of body
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-app')).opacity,
+      getComputedStyle(getPickerElement()).opacity,
       1
     );
   });
@@ -119,8 +128,9 @@ module('Integration | Component | color-picker', function(hooks) {
     await sleep(1000);
     await click('.pcr-button');
 
+    // this is because the color picker is created as a child of body
     assert.equal(
-      getComputedStyle(this.element.querySelector('.pcr-color-opacity')).display,
+      getComputedStyle(getPickerElement('.pcr-color-opacity')).display,
       'none'
     );
   });
