@@ -143,7 +143,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    this._pickr.destroy();
+    this._pickr.destroyAndRemove();
     this._super(...arguments);
   }
 });
