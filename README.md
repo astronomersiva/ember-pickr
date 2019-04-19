@@ -19,7 +19,7 @@ Usage
 {{color-picker
   value=value
   default="#e04e39"
-  format="hex"
+  format="hexa"
 }}
 ```
 
@@ -40,18 +40,18 @@ to the picker button. If clipping occurs, the color picker will automatically ch
 To use it set the cursor on a position where a number is and scroll, use ctrl to make steps of five | **`true`**
 * **`saveLabel`**: Button label for save button | **`Save`**
 * **`clearLabel`**: Button label for clear button | **`Clear`**
-* **`format`**: One of `hsva`, `hsla`, `rgba`, `hex`, `cmyk` | **`{ h, s, v, a }`**
+* **`format`**: One of `hsva`, `hsla`, `rgba`, `hexa`, `cmyk` | **`{ h, s, v, a }`**
 * To use the **`onChange`** and **`onSave`** handlers, use closure actions.
 ```
 {{color-picker
   value=value
   default="#e04e39"
-  format="hex"
+  format="hexa"
   saveLabel="Set Color"
 }}
 ```
 The **`onSave`** and **`onChange`** handlers can take two parameters - **`hsva`** and **`instance`** where **`hsva`** is an HSVa color object
-and **`instance`** is the current instance of Pickr. The HSVa object has **`toHSVA`**, **`toHSLA`**, **`toRGBA`**, **`toHEX`**, **`toCMYK`**,
+and **`instance`** is the current instance of Pickr. The HSVa object has **`toHSVA`**, **`toHSLA`**, **`toRGBA`**, **`toHEXA`**, **`toCMYK`**,
 and **`clone`** methods that return the converts the object into corresponding arrays. You can call **`toString`** on the
 resulting array to get the string representation of the colors.
 * To toggle components inside the color picker, you can pass the following options to the **`components`** property:

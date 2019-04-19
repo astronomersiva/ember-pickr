@@ -19,7 +19,7 @@ export default Controller.extend({
 
   actions: {
     handleOnChange(hsva) {
-      this.set('value', hsva.toHEX().toString());
+      this.set('value', hsva.toHEXA().toString());
     }
   }
 });

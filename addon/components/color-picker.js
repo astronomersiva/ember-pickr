@@ -131,9 +131,13 @@ export default Component.extend({
     let format = this.get('format');
     if (format) {
       format = format.toUpperCase();
+      if (format === 'HEX') {
+        format = 'HEXA';
+      }
+
       assert(
-        '[ember-pickr]: Format must be one of HSVA, HSLA, RGBA, HEX, CMYK',
-        ['HSVA', 'HSLA', 'RGBA', 'HEX', 'CMYK'].includes(format)
+        '[ember-pickr]: Format must be one of HSVA, HSLA, RGBA, HEXA, CMYK',
+        ['HSVA', 'HSLA', 'RGBA', 'HEXA', 'HEX', 'CMYK'].includes(format)
       );
 
       value = value[`to${format}`]().toString();

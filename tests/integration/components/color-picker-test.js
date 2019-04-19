@@ -139,7 +139,7 @@ module('Integration | Component | color-picker', function(hooks) {
     this.set('color', '#123');
 
     await render(hbs`
-      {{color-picker value=color format="hex"}}
+      {{color-picker value=color format="hexa"}}
     `);
     await sleep(1000);
     assert.equal(this.get('color'), '#123123');
@@ -157,7 +157,7 @@ module('Integration | Component | color-picker', function(hooks) {
 
     await render(hbs`
       {{input value=color}}
-      {{color-picker value=color format="hex"}}
+      {{color-picker value=color format="hexa"}}
     `);
     await sleep(1000);
 
