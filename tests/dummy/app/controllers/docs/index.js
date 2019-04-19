@@ -19,12 +19,12 @@ export default Controller.extend({
   actions: {
     handleOnSave(hsva) {
       if (hsva) {
-        window.alert(`You chose ${hsva.toHEX().toString()}!`);
+        window.alert(`You chose ${hsva.toHEXA().toString()}!`);
       }
     },
 
     handleOnChange(hsva) {
-      this.set('value', hsva.toHEX().toString());
+      this.set('value', hsva.toHEXA().toString());
     }
   }
 });
