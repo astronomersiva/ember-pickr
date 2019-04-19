@@ -57,6 +57,7 @@ export default Component.extend({
     };
 
     this._components = mergeDeep({
+      palette: true,
       preview: true,
       opacity: true,
       hue: true,
@@ -131,13 +132,14 @@ export default Component.extend({
     let format = this.get('format');
     if (format) {
       format = format.toUpperCase();
+      // backward compat till next major version
       if (format === 'HEX') {
         format = 'HEXA';
       }
 
       assert(
         '[ember-pickr]: Format must be one of HSVA, HSLA, RGBA, HEXA, CMYK',
-        ['HSVA', 'HSLA', 'RGBA', 'HEXA', 'HEX', 'CMYK'].includes(format)
+        ['HSVA', 'HSLA', 'RGBA', 'HEXA', 'CMYK'].includes(format)
       );
 
       value = value[`to${format}`]().toString();
