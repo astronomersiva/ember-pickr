@@ -57,6 +57,7 @@ resulting array to get the string representation of the colors.
 * To toggle components inside the color picker, you can pass the following options to the **`components`** property:
 ```javascript
 {
+  palette: true,  // Will be overwritten with true if preview, opacity or hue are true
   preview: true,
   opacity: true,
   hue: true,
