@@ -21,7 +21,7 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "@simonwep/pickr": "0.4.10",
+    "@simonwep/pickr": "0.6.2",
     "caniuse-api": "^3.0.0",
     "ember-auto-import": "^1.2.19",
     "ember-cli-babel": "^7.1.2",
