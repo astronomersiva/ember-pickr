@@ -142,13 +142,13 @@ module('Integration | Component | color-picker', function(hooks) {
       {{color-picker value=color format="hexa"}}
     `);
     await sleep(1000);
-    assert.equal(this.get('color'), '#123123');
+    assert.equal(this.get('color'), '#112233');
 
     await render(hbs`
       {{color-picker value=color format="hsva"}}
     `);
     await sleep(1000);
-    assert.equal(this.get('color'), 'hsva(153, 64%, 20%, 1.0)');
+    assert.equal(this.get('color'), 'hsva(210, 66.66666666666667%, 20%, 1)');
 
   });
 
@@ -161,8 +161,8 @@ module('Integration | Component | color-picker', function(hooks) {
     `);
     await sleep(1000);
 
-    assert.equal(this.get('color'), '#123123');
-    assert.equal(this.element.querySelector('input').value, '#123123');
+    assert.equal(this.get('color'), '#112233');
+    assert.equal(this.element.querySelector('input').value, '#112233');
 
     await fillIn('input', '#00ff00');
     assert.equal(this.get('color'), '#00ff00');

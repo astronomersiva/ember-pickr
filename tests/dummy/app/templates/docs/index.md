@@ -29,7 +29,7 @@ ember install ember-pickr
 
 ## Options
 
-Takes all [options](https://github.com/Simonwep/pickr#optional-options) that are applicable to pickr.
+Takes all [options](https://github.com/Simonwep/pickr#options) that are applicable to pickr.
 
 * **`disabled`**: Start state. If `true`, 'disabled' will be added to the button's classlist | **`false`**
 * **`default`**: Default color | **#fff**
@@ -101,3 +101,33 @@ You can call **`toString`** on the resulting array to get the string representat
   {{demo.snippet 'template-components.hbs'}}
   {{demo.snippet 'controller-components.js' title='controller.js'}}
 {{/docs-demo}}
+
+## Themes
+
+pickr ships with three themes (`classic`, `monolith` and `nano`).
+By default only the `classic` theme is included. If you want more themes available at runtime, adjust your `ember-cli-build.js`:
+
+```js
+// ember-cli-build.js
+new EmberApp(defaults, {
+  // ...
+  'ember-pickr': {
+    themes: ['classic', 'monolith', 'nano']
+  }
+  // ...
+};
+```
+
+### Classic
+
+{{color-picker theme="classic"}}
+
+### Monolith
+
+{{color-picker theme="monolith"}}
+
+### Nano
+
+{{color-picker theme="nano"}}
+
+
