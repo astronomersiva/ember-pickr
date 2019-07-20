@@ -1,7 +1,13 @@
 'use strict';
 
-const path = require('path');
-const caniuse = require('caniuse-api')
+const caniuse = require('caniuse-api');
+const defaultOptions = { themes: ['classic'] };
+
+function buildOptions(app) {
+  const customOptions = app.options['ember-pickr'] || {};
+
+  return Object.assign({}, defaultOptions, customOptions);
+}
 
 module.exports = {
   name: require('./package').name,
@@ -27,11 +33,12 @@ module.exports = {
 
     let findHost = this._findHost;
     let app = findHost.call(this);
+    const options = buildOptions(app);
 
     this.app = app;
 
-    let pickr = path.join('node_modules', '@simonwep/pickr', 'dist');
-    app.import(path.join(pickr, 'pickr.min.css'));
+    options.themes.forEach(theme =>
+      app.import(`node_modules/@simonwep/pickr/dist/themes/${theme}.min.css`));
 
     let targets = this.project.targets;
     this.options.autoImport.alias.pickr = this.choosePickrForTargets(targets);
