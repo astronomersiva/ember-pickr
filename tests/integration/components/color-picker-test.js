@@ -167,4 +167,72 @@ module('Integration | Component | color-picker', function(hooks) {
     await fillIn('input', '#00ff00');
     assert.equal(this.get('color'), '#00ff00');
   });
+
+  test('it proxies known pickr events', async function(assert) {
+    // TODO: this should probably replaced by testdouble or sinon if used more often
+    const calls = {};
+    const spyCall = (type) => () => calls[type] = true;
+
+    this.set('color', '#123');
+    this.set('onSave', spyCall('onSave'));
+    this.set('onClear', spyCall('onClear'));
+    this.set('onChange', spyCall('onChange'));
+    this.set('onCancel', spyCall('onCancel'));
+    this.set('onSwatchSelect', spyCall('onSwatchSelect'));
+    this.set('swatches', ['#343a40', '#e03131', '#c2255c', '#9c36b5', '#6741d9', '#3b5bdb', '#1971c2']);
+    this.set('components', {
+      palette: true,
+      preview: true,
+      opacity: true,
+      hue: true,
+      interaction: {
+        hex: true,
+        rgba: true,
+        hsla: true,
+        hsva: true,
+        cmyk: true,
+        input: true,
+        cancel: true,
+        clear: true,
+        save: true
+      }
+    });
+
+    await render(hbs`
+      {{input value=color}}
+      {{color-picker 
+        value=color 
+        components=components
+        swatches=swatches
+        format="hexa"
+        onSave=onSave
+        onClear=onClear
+        onChange=onChange
+        onCancel=onCancel
+        onSwatchSelect=onSwatchSelect
+      }}
+    `);
+    await sleep(1000);
+    const inPickr = (selector) => getPickerElement().querySelector(selector);
+
+    await click('.pcr-button');
+    // trigger onClear
+    await click(inPickr('.pcr-clear[value="Clear"]'));
+    // trigger onChange
+    await fillIn(inPickr('.pcr-result'), '#bada55');
+    // trigger onSave
+    await click(inPickr('.pcr-save'));
+
+    await click('.pcr-button');
+    // trigger onSwatchSelect
+    await click(inPickr('.pcr-swatches button'));
+    // trigger onCancel
+    await click(inPickr('.pcr-clear[value="Cancel"]'));
+
+    assert.ok(calls.onSave, 'called onSave');
+    assert.ok(calls.onClear, 'called onClear');
+    assert.ok(calls.onChange, 'called onChange');
+    assert.ok(calls.onCancel, 'called onCancel');
+    assert.ok(calls.onSwatchSelect, 'called onSwatchSelect');
+  });
 });

@@ -183,6 +183,44 @@ const ColorPicker = Component.extend({
    */
   adjustableNumbers: true,
 
+  /**
+   * User clicked the save / clear button. Also fired on clear with `null` as color.
+   * @argument onSave
+   * @type {Function}
+   * @param {HSVaColorObject} colorObject
+   */
+  onSave: undefined,
+
+  /**
+   * Called after user cleared the color.
+   * @argument onClear
+   * @type {Function}
+   */
+  onClear: undefined,
+
+  /**
+   * Called after color has changed (but not saved). Also fired on `swatchselect`.
+   * @argument onChange
+   * @type {Function}
+   * @param {HSVaColorObject} colorObject
+   */
+  onChange: undefined,
+
+  /**
+   * Called after user clicked the cancel button (return to previous color).
+   * @argument onCancel
+   * @type {Function}
+   */
+  onCancel: undefined,
+
+  /**
+   * Called after user clicked one of the swatches.
+   * @argument onSwatchSelect
+   * @type {Function}
+   * @param {HSVaColorObject} colorObject
+   */
+  onSwatchSelect: undefined,
+
   didInsertElement() {
     this._super(...arguments);
     this._setupPickr();
@@ -226,9 +264,7 @@ const ColorPicker = Component.extend({
 
     this._pickr.on('init', () => {
       this.set('_value', this.formatColor(this._pickr.getColor()));
-    });
-
-    this._pickr.on('save', (...args) => {
+    }).on('save', (...args) => {
       let [hsva, instance] = args;
       let value = this.formatColor(hsva);
       this.set('_value', value);
@@ -236,12 +272,21 @@ const ColorPicker = Component.extend({
       if (this.onSave) {
         this.onSave(hsva, instance);
       }
-    });
-
-    this._pickr.on('change', (...args) => {
-      let [hsva, instance] = args;
+    }).on('clear', (...args) => {
+      if (this.onClear) {
+        this.onClear(...args);
+      }
+    }).on('change', (...args) => {
       if (this.onChange) {
-        this.onChange(hsva, instance);
+        this.onChange(...args);
+      }
+    }).on('cancel', (...args) => {
+      if (this.onCancel) {
+        this.onCancel(...args);
+      }
+    }).on('swatchselect', (...args) => {
+      if (this.onSwatchSelect) {
+        this.onSwatchSelect(...args);
       }
     });
   },
