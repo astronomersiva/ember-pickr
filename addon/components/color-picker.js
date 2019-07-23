@@ -10,7 +10,26 @@ import { assert } from '@ember/debug';
 
 import Pickr from 'pickr';
 
-const optionFields = ["theme", "closeOnScroll", "appClass", "useAsButton", "inline", "autoReposition", "sliders", "disabled", "lockOpacity", "outputPrecision", "comparison", "default", "swatches", "defaultRepresentation", "showAlways", "closeWithKey", "position", "adjustableNumbers"];
+const optionFields = [
+  "theme",
+  "closeOnScroll",
+  "appClass",
+  "useAsButton",
+  "inline",
+  "autoReposition",
+  "sliders",
+  "disabled",
+  "lockOpacity",
+  "outputPrecision",
+  "comparison",
+  "default",
+  "swatches",
+  "defaultRepresentation",
+  "showAlways",
+  "closeWithKey",
+  "position",
+  "adjustableNumbers"
+];
 
 /**
  * class ColorPicker
@@ -184,6 +203,20 @@ const ColorPicker = Component.extend({
   adjustableNumbers: true,
 
   /**
+   * Pickr got closed
+   * @argument onHide
+   * @type {Function}
+   */
+  onHide: undefined,
+
+  /**
+   * Pickr got opened
+   * @argument onShow
+   * @type {Function}
+   */
+  onShow: undefined,
+
+  /**
    * User clicked the save / clear button. Also fired on clear with `null` as color.
    * @argument onSave
    * @type {Function}
@@ -205,6 +238,14 @@ const ColorPicker = Component.extend({
    * @param {HSVaColorObject} colorObject
    */
   onChange: undefined,
+
+  /**
+   * User has stopped changing the color.
+   * @argument onChangeStop
+   * @type {Function}
+   * @param {HSVaColorObject} colorObject
+   */
+  onChangeStop: undefined,
 
   /**
    * Called after user clicked the cancel button (return to previous color).
@@ -272,6 +313,14 @@ const ColorPicker = Component.extend({
       if (this.onSave) {
         this.onSave(hsva, instance);
       }
+    }).on('hide', (...args) => {
+      if (this.onHide) {
+        this.onHide(...args);
+      }
+    }).on('show', (...args) => {
+      if (this.onShow) {
+        this.onShow(...args);
+      }
     }).on('clear', (...args) => {
       if (this.onClear) {
         this.onClear(...args);
@@ -279,6 +328,10 @@ const ColorPicker = Component.extend({
     }).on('change', (...args) => {
       if (this.onChange) {
         this.onChange(...args);
+      }
+    }).on('changestop', (...args) => {
+      if (this.onChangeStop) {
+        this.onChangeStop(...args);
       }
     }).on('cancel', (...args) => {
       if (this.onCancel) {
