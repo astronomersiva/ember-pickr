@@ -175,6 +175,8 @@ module('Integration | Component | color-picker', function(hooks) {
 
     this.set('color', '#123');
     this.set('onSave', spyCall('onSave'));
+    this.set('onShow', spyCall('onShow'));
+    this.set('onHide', spyCall('onHide'));
     this.set('onClear', spyCall('onClear'));
     this.set('onChange', spyCall('onChange'));
     this.set('onCancel', spyCall('onCancel'));
@@ -209,6 +211,8 @@ module('Integration | Component | color-picker', function(hooks) {
         onClear=onClear
         onChange=onChange
         onCancel=onCancel
+        onShow=onShow
+        onHide=onHide
         onSwatchSelect=onSwatchSelect
       }}
     `);
@@ -230,6 +234,8 @@ module('Integration | Component | color-picker', function(hooks) {
     await click(inPickr('.pcr-clear[value="Cancel"]'));
 
     assert.ok(calls.onSave, 'called onSave');
+    assert.ok(calls.onShow, 'called onShow');
+    assert.ok(calls.onHide, 'called onHide');
     assert.ok(calls.onClear, 'called onClear');
     assert.ok(calls.onChange, 'called onChange');
     assert.ok(calls.onCancel, 'called onCancel');
