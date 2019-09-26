@@ -25,6 +25,10 @@ export default Controller.extend({
 
     handleOnChange(hsva) {
       this.set('value', hsva.toHEXA().toString());
+    },
+
+    onInit(pickrInstance) {
+      pickrInstance.setColor(null);
     }
   }
 });
