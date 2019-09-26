@@ -102,6 +102,26 @@ You can call **`toString`** on the resulting array to get the string representat
   {{demo.snippet 'controller-components.js' title='controller.js'}}
 {{/docs-demo}}
 
+If you would like to set the default color as null, you can make use of the **`onInit`** hook.
+
+{{#docs-demo class='docs-text-left' as |demo|}}
+  {{#demo.example name='null-example.hbs'}}
+    <p>The currently selected color is <strong>{{nullExample}}</strong>.</p>
+    <div class="docs-flex">
+      {{color-picker
+        value=nullExample
+        format="hex"
+        default="00f1f1"
+        onInit=(action "onInit")
+      }}
+    </div>
+  {{/demo.example}}
+
+  {{demo.snippet 'null-example.hbs' title='template.hbs'}}
+  {{demo.snippet 'null-example.js' title='controller.js'}}
+{{/docs-demo}}
+
+
 ## Themes
 
 pickr ships with three themes (`classic`, `monolith` and `nano`).
@@ -129,5 +149,3 @@ new EmberApp(defaults, {
 ### Nano
 
 {{color-picker theme="nano"}}
-
-

@@ -203,6 +203,13 @@ const ColorPicker = Component.extend({
   adjustableNumbers: true,
 
   /**
+   * Initialization done - Pickr can be used
+   * @argument onInit
+   * @type {Function}
+   */
+  onInit: undefined,
+
+  /**
    * Pickr got closed
    * @argument onHide
    * @type {Function}
@@ -303,8 +310,12 @@ const ColorPicker = Component.extend({
       components: this._components
     });
 
-    this._pickr.on('init', () => {
+    this._pickr.on('init', (...args) => {
       this.set('_value', this.formatColor(this._pickr.getColor()));
+
+      if (this.onInit) {
+        this.onInit(...args);
+      }
     }).on('save', (...args) => {
       let [hsva, instance] = args;
       let value = this.formatColor(hsva);

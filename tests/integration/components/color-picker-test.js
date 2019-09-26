@@ -168,12 +168,39 @@ module('Integration | Component | color-picker', function(hooks) {
     assert.equal(this.get('color'), '#00ff00');
   });
 
+  test('it supports null values', async function(assert) {
+    this.set('onInit', function(pickrInstance) {
+      pickrInstance.setColor(null);
+    });
+
+    await render(hbs`
+      {{input value=color}}
+      {{color-picker 
+        value=color 
+        format="hexa"
+        onInit=onInit
+      }}
+    `);
+
+    await sleep(1000);
+
+    assert.equal(this.value, null);
+    assert.equal(this.color, null);
+
+    // background color in pickr for null
+    assert.equal(
+      getComputedStyle(this.element.querySelector('.pcr-button')).color,
+      'rgba(0, 0, 0, 0.15)'
+    );
+  });
+
   test('it proxies known pickr events', async function(assert) {
     // TODO: this should probably replaced by testdouble or sinon if used more often
     const calls = {};
     const spyCall = (type) => () => calls[type] = true;
 
     this.set('color', '#123');
+    this.set('onInit', spyCall('onInit'));
     this.set('onSave', spyCall('onSave'));
     this.set('onShow', spyCall('onShow'));
     this.set('onHide', spyCall('onHide'));
@@ -207,6 +234,7 @@ module('Integration | Component | color-picker', function(hooks) {
         components=components
         swatches=swatches
         format="hexa"
+        onInit=onInit
         onSave=onSave
         onClear=onClear
         onChange=onChange
@@ -233,6 +261,7 @@ module('Integration | Component | color-picker', function(hooks) {
     // trigger onCancel
     await click(inPickr('.pcr-clear[value="Cancel"]'));
 
+    assert.ok(calls.onInit, 'called onInit');
     assert.ok(calls.onSave, 'called onSave');
     assert.ok(calls.onShow, 'called onShow');
     assert.ok(calls.onHide, 'called onHide');
