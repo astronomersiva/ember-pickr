@@ -259,7 +259,7 @@ module('Integration | Component | color-picker', function(hooks) {
     // trigger onSwatchSelect
     await click(inPickr('.pcr-swatches button'));
     // trigger onCancel
-    await click(inPickr('.pcr-clear[value="Cancel"]'));
+    await click(inPickr('.pcr-cancel[value="Cancel"]'));
 
     assert.ok(calls.onInit, 'called onInit');
     assert.ok(calls.onSave, 'called onSave');
