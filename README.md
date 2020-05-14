@@ -3,6 +3,15 @@ ember-pickr [![Build Status](https://travis-ci.org/astronomersiva/ember-pickr.sv
 
 Color Picker for EmberJS using [pickr](https://github.com/Simonwep/pickr)
 
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
 [Demo & Documentation](https://astronomersiva.github.io/ember-pickr/)
 
 Installation
@@ -38,8 +47,7 @@ Takes all [options](https://github.com/Simonwep/pickr#optional-options) that are
 to the picker button. If clipping occurs, the color picker will automatically choose his position. | **`middle`**
 * **`adjustableNumbers`**: Enables the ability to change numbers in an input field with the scroll-wheel.
 To use it set the cursor on a position where a number is and scroll, use ctrl to make steps of five | **`true`**
-* **`saveLabel`**: Button label for save button | **`Save`**
-* **`clearLabel`**: Button label for clear button | **`Clear`**
+* **`i18n`**: Translations
 * **`format`**: One of `hsva`, `hsla`, `rgba`, `hexa`, `cmyk` | **`{ h, s, v, a }`**
 * To use the **`onChange`** and **`onSave`** handlers, use closure actions.
 ```
@@ -47,7 +55,6 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
   value=value
   default="#e04e39"
   format="hexa"
-  saveLabel="Set Color"
 }}
 ```
 The **`onSave`** and **`onChange`** handlers can take two parameters - **`hsva`** and **`instance`** where **`hsva`** is an HSVa color object
