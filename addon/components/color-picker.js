@@ -8,7 +8,7 @@ import mergeDeep from "../utils/mergeDeep";
 import { computed }  from '@ember/object';
 import { assert } from '@ember/debug';
 
-import Pickr from 'pickr';
+import Pickr from '@simonwep/pickr';
 
 const optionFields = [
   "theme",
