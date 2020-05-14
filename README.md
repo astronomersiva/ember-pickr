@@ -3,6 +3,15 @@ ember-pickr [![Build Status](https://travis-ci.org/astronomersiva/ember-pickr.sv
 
 Color Picker for EmberJS using [pickr](https://github.com/Simonwep/pickr)
 
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
+
+
 [Demo & Documentation](https://astronomersiva.github.io/ember-pickr/)
 
 Installation
