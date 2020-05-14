@@ -8,8 +8,6 @@ import mergeDeep from "../utils/mergeDeep";
 import { computed }  from '@ember/object';
 import { assert } from '@ember/debug';
 
-import Pickr from '@simonwep/pickr';
-
 const optionFields = [
   "theme",
   "closeOnScroll",
@@ -316,56 +314,60 @@ const ColorPicker = Component.extend({
       }
     }, this.get('components'));
 
-    this._pickr = Pickr.create({
-      el: this.element,
+    import('@simonwep/pickr').then((module) => {
+      const Pickr = module.default;
 
-      ...this._options,
+      this._pickr = Pickr.create({
+        el: this.element,
 
-      components: this._components
-    });
+        ...this._options,
 
-    this._pickr.on('init', (...args) => {
-      this.set('_value', this.formatColor(this._pickr.getColor()));
+        components: this._components
+      });
 
-      if (this.onInit) {
-        this.onInit(...args);
-      }
-    }).on('save', (...args) => {
-      let [hsva, instance] = args;
-      let value = this.formatColor(hsva);
-      this.set('_value', value);
+      this._pickr.on('init', (...args) => {
+        this.set('_value', this.formatColor(this._pickr.getColor()));
 
-      if (this.onSave) {
-        this.onSave(hsva, instance);
-      }
-    }).on('hide', (...args) => {
-      if (this.onHide) {
-        this.onHide(...args);
-      }
-    }).on('show', (...args) => {
-      if (this.onShow) {
-        this.onShow(...args);
-      }
-    }).on('clear', (...args) => {
-      if (this.onClear) {
-        this.onClear(...args);
-      }
-    }).on('change', (...args) => {
-      if (this.onChange) {
-        this.onChange(...args);
-      }
-    }).on('changestop', (...args) => {
-      if (this.onChangeStop) {
-        this.onChangeStop(...args);
-      }
-    }).on('cancel', (...args) => {
-      if (this.onCancel) {
-        this.onCancel(...args);
-      }
-    }).on('swatchselect', (...args) => {
-      if (this.onSwatchSelect) {
-        this.onSwatchSelect(...args);
-      }
+        if (this.onInit) {
+          this.onInit(...args);
+        }
+      }).on('save', (...args) => {
+        let [hsva, instance] = args;
+        let value = this.formatColor(hsva);
+        this.set('_value', value);
+
+        if (this.onSave) {
+          this.onSave(hsva, instance);
+        }
+      }).on('hide', (...args) => {
+        if (this.onHide) {
+          this.onHide(...args);
+        }
+      }).on('show', (...args) => {
+        if (this.onShow) {
+          this.onShow(...args);
+        }
+      }).on('clear', (...args) => {
+        if (this.onClear) {
+          this.onClear(...args);
+        }
+      }).on('change', (...args) => {
+        if (this.onChange) {
+          this.onChange(...args);
+        }
+      }).on('changestop', (...args) => {
+        if (this.onChangeStop) {
+          this.onChangeStop(...args);
+        }
+      }).on('cancel', (...args) => {
+        if (this.onCancel) {
+          this.onCancel(...args);
+        }
+      }).on('swatchselect', (...args) => {
+        if (this.onSwatchSelect) {
+          this.onSwatchSelect(...args);
+        }
+      });
     });
   },
 
@@ -414,7 +416,9 @@ const ColorPicker = Component.extend({
   },
 
   willDestroyElement() {
-    this._pickr.destroyAndRemove();
+    if (this._pickr) {
+      this._pickr.destroyAndRemove();
+    }
     this._super(...arguments);
   }
 });
