@@ -41,8 +41,7 @@ Takes all [options](https://github.com/Simonwep/pickr#options) that are applicab
 to the picker button. If clipping occurs, the color picker will automatically choose his position. | **`middle`**
 * **`adjustableNumbers`**: Enables the ability to change numbers in an input field with the scroll-wheel.
 To use it set the cursor on a position where a number is and scroll, use ctrl to make steps of five | **`true`**
-* **`saveLabel`**: Button label for save button | **`Save`**
-* **`clearLabel`**: Button label for clear button | **`Clear`**
+* **`i18n`**: Translations
 * **`format`**: One of `hsva`, `hsla`, `rgba`, `hexa`, `cmyk` | **`{ h, s, v, a }`**
 * To use the **`onChange`** and **`onSave`** handlers, use closure actions.
 {{#docs-demo class='docs-text-left' as |demo|}}
@@ -53,7 +52,6 @@ To use it set the cursor on a position where a number is and scroll, use ctrl to
         value=color
         default="#e04e39"
         format="hexa"
-        saveLabel="Set Color"
         onSave=(action "handleOnSave")
       }}
     </div>

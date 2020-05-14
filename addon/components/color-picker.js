@@ -15,6 +15,7 @@ const optionFields = [
   "closeOnScroll",
   "appClass",
   "useAsButton",
+  "padding",
   "inline",
   "autoReposition",
   "sliders",
@@ -28,7 +29,8 @@ const optionFields = [
   "showAlways",
   "closeWithKey",
   "position",
-  "adjustableNumbers"
+  "adjustableNumbers",
+  "i18n"
 ];
 
 /**
@@ -71,6 +73,15 @@ const ColorPicker = Component.extend({
    @default false
    */
   useAsButton: false,
+
+  /**
+   Size of gap between pickr (widget) and the corresponding reference (button) in px
+   @argument padding
+   @type number
+   @default null
+   */
+  padding: null,
+
 
   /**
     If true pickr won't be floating, and instead will append after the in el resolved element.
@@ -203,6 +214,14 @@ const ColorPicker = Component.extend({
   adjustableNumbers: true,
 
   /**
+    Translations
+    @argument i18n
+    @type object
+    @default {}
+   */
+  i18n: {},
+
+  /**
    * Initialization done - Pickr can be used
    * @argument onInit
    * @type {Function}
@@ -279,11 +298,6 @@ const ColorPicker = Component.extend({
       ...this.getProperties(optionFields),
       // Default color
       default: this.get('value') || this.get('default') || 'fff',
-      strings: {
-        save: this.get('saveLabel') || 'Save',
-        clear: this.get('clearLabel') || 'Clear',
-        cancel: this.get('cancelLabel') || 'Cancel',
-      }
     };
 
     this._components = mergeDeep({
